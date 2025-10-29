@@ -8,12 +8,12 @@ public class InputView {
         System.out.println(ViewMessage.BUDGET_INPUT_MESSAGE.getMessage());
         return Console.readLine();
     }
-    public String readWinningLottoNumbers() {
-        System.out.println(ViewMessage.WINNING_LOTTO_NUMBERS_INPUT_MESSAGE.getMessage());
+    public String readDrawnLottoNumbers() {
+        System.out.println(ViewMessage.DRAWN_LOTTO_NUMBERS_INPUT_MESSAGE.getMessage());
         return Console.readLine();
     }
-    public String readWinningLottoBonusNumber() {
-        System.out.println(ViewMessage.WINNING_LOTTO_BONUS_NUMBER_INPUT_MESSAGE.getMessage());
+    public String readDrawnLottoBonusNumber() {
+        System.out.println(ViewMessage.DRAWN_LOTTO_BONUS_NUMBER_INPUT_MESSAGE.getMessage());
         return Console.readLine();
     }
 }
