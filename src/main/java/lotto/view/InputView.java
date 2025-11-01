@@ -1,7 +1,7 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.message.ViewMessage;
+import lotto.domain.message.ViewMessage;
 
 public class InputView {
     public String readBudget() {
@@ -17,4 +17,3 @@ public class InputView {
         return Console.readLine();
     }
 }
-

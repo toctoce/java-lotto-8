@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.message.ViewMessage;
+import lotto.domain.message.ViewMessage;
 
 public class OutputView {
     // TODO : 파라미터를 dto로 수정해야함.
