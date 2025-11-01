@@ -58,6 +58,14 @@
 6개 일치 (2,000,000,000원) - 0개
 총 수익률은 62.5%입니다.
 ```
+# 시퀀스 다이어그램
+## 로또 구입 금액 입력
+![BudgetInputSequenceDiagram.png](image/BudgetInputSequenceDiagram.png)
+## 당첨 번호, 보너스 번호 입력
+![DrawnLottoNumberInputSequenceDiagram.png](image/DrawnLottoNumberInputSequenceDiagram.png)
+## 로또 결과 생성 및 출력
+![LottoResultSequenceDiagram.png](image/LottoResultSequenceDiagram.png)
+
 # 구현할 기능
 ## 프로세스 흐름 제어
 - 입력 -> 로또 구매 -> 당첨 번호 입력 -> 로또 결과 확인 -> 당첨금 계산 -> 출력
