@@ -116,3 +116,25 @@
 - 보너스 번호
   - 숫자 이외의 다른 문자가 입력됨
   - 1~45 사이가 아님
+
+# 프로젝트 구조
+controller
+- LottoController
+domain
+- Lotto
+  - Lotto
+  - Lottos
+- vo
+  - Budget
+- message
+  - ErrorMessage
+  - ViewMessage
+- constants
+  - Constants
+util
+- RandomNumberGenerator
+- Calculator
+- Parser
+view
+- InputView
+- OutputView
