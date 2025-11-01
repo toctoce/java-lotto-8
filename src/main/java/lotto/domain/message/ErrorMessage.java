@@ -12,7 +12,7 @@ public enum ErrorMessage {
     INVALID_NUMBER_RANGE("[ERROR] 번호가 1이상 45이하여야 합니다."),
     ;
     private final String message;
-    private boolean isFormatted;
+    private final boolean isFormatted;
 
     ErrorMessage(String message) {
         this.message = message;
