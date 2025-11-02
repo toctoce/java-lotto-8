@@ -1,6 +1,7 @@
 package lotto.domain.vo.lotto;
 
 import java.util.List;
+import java.util.Objects;
 import lotto.domain.constants.Constants;
 import lotto.domain.message.ErrorMessage;
 
@@ -21,7 +22,7 @@ public class Lotto {
         numbers.forEach(this::validateNumber);
     }
 
-    protected void validateNumber(Integer number) {
+    private void validateNumber(Integer number) {
         if (number < Constants.LOTTO_NUMBER_MIN || number > Constants.LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
         }
@@ -31,4 +32,18 @@ public class Lotto {
         return this.numbers;
     }
     // TODO: 추가 기능 구현
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(getNumbers(), lotto.getNumbers());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getNumbers());
+    }
 }

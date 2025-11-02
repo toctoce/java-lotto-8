@@ -8,6 +8,8 @@ import java.util.regex.PatternSyntaxException;
 import lotto.domain.constants.Constants;
 import lotto.domain.message.ErrorMessage;
 import lotto.domain.vo.Budget;
+import lotto.domain.vo.DrawnLottoNumber;
+import lotto.domain.vo.lotto.Lotto;
 
 public class Parser {
 
@@ -21,26 +23,35 @@ public class Parser {
         return new Budget(amount);
     }
 
-    public static List<Integer> inputToNumbers(String input) {
+
+    private static Lotto inputToLotto(String input) {
         validateNotBlank(input);
         validateFormat(input, NUMBERS_PATTERN);
         String[] splitResult = split(input, Constants.DELIMITER);
         validateNumberCount(splitResult);
-        return splitResultToNumberList(splitResult);
+        List<Integer> numbers = splitResultToNumberList(splitResult);
+        return new Lotto(numbers);
     }
 
     private static List<Integer> splitResultToNumberList(String[] splitResult) {
         return Arrays.stream(splitResult)
-                .map(Integer::parseInt)
+                .map(Parser::parseInt)
                 .toList();
     }
 
     private static String[] split(String input, String delimiter) {
         try {
-            String[] splitResult = input.split(delimiter);
-            return splitResult;
+            return input.split(delimiter);
         } catch (PatternSyntaxException e) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
+        }
+    }
+
+    private static Integer parseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_AN_INTEGER.getMessage());
         }
     }
 

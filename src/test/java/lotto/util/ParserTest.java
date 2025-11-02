@@ -4,11 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.constants.Constants;
 import lotto.domain.message.ErrorMessage;
 import lotto.domain.vo.Budget;
+import lotto.domain.vo.lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -73,18 +73,18 @@ class ParserTest {
 
     @ParameterizedTest
     @MethodSource("generateNumbersData")
-    void 번호입력_정상동작(String input, List<Integer> expected) {
+    void 번호입력_정상동작(String input, Lotto expected) {
         // when
-        List<Integer> numbers = Parser.inputToNumbers(input);
+        Lotto lotto = Parser.inputToLotto(input);
         // then
-        assertThat(numbers).isEqualTo(expected);
+        assertThat(lotto).isEqualTo(expected);
     }
 
     static Stream<Arguments> generateNumbersData() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", Arrays.asList(1, 2, 3, 4, 5, 6)),
-                Arguments.of("10,20,30,40,41,45", Arrays.asList(10, 20, 30, 40, 41, 45)),
-                Arguments.of("31,32,33,34,35,36", Arrays.asList(31, 32, 33, 34, 35, 36))
+                Arguments.of("1,2,3,4,5,6", new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                Arguments.of("10,20,30,40,41,45", new Lotto(Arrays.asList(10, 20, 30, 40, 41, 45))),
+                Arguments.of("31,32,33,34,35,36", new Lotto(Arrays.asList(31, 32, 33, 34, 35, 36)))
         );
     }
 
@@ -96,7 +96,7 @@ class ParserTest {
         @ValueSource(strings = {"a,b,c,d,e,f", " , , , , , ", "1,2,3,4,5,x", "1, 2, 3, 4, 5, 6"})
         void 숫자_쉼표_이외의_다른_문자가_입력된다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.inputToNumbers(input))
+            assertThatThrownBy(() -> Parser.inputToLotto(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
         }
@@ -105,7 +105,7 @@ class ParserTest {
         @ValueSource(strings = {"1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5"})
         void 로또_숫자는_6개여야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.inputToNumbers(input))
+            assertThatThrownBy(() -> Parser.inputToLotto(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
         }
