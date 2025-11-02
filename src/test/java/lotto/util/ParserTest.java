@@ -3,11 +3,12 @@ package lotto.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.constants.Constants;
 import lotto.domain.message.ErrorMessage;
 import lotto.domain.vo.Budget;
+import lotto.domain.vo.DrawnLottoNumber;
 import lotto.domain.vo.lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -55,8 +56,7 @@ class ParserTest {
         void 금액은_양수여야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToBudget(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.AMOUNT_NOT_POSITIVE.getMessage());
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @ParameterizedTest
@@ -73,30 +73,33 @@ class ParserTest {
 
     @ParameterizedTest
     @MethodSource("generateNumbersData")
-    void 번호입력_정상동작(String input, Lotto expected) {
+    void 당첨번호_보너스번호_입력_정상동작(String inputNumbers, String bonusNumber, DrawnLottoNumber expected) {
         // when
-        Lotto lotto = Parser.inputToLotto(input);
+        DrawnLottoNumber drawnLottoNumber = Parser.InputToDrawnLottoNumber(inputNumbers, bonusNumber);
         // then
-        assertThat(lotto).isEqualTo(expected);
+        assertThat(drawnLottoNumber).isEqualTo(expected);
     }
 
     static Stream<Arguments> generateNumbersData() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                Arguments.of("10,20,30,40,41,45", new Lotto(Arrays.asList(10, 20, 30, 40, 41, 45))),
-                Arguments.of("31,32,33,34,35,36", new Lotto(Arrays.asList(31, 32, 33, 34, 35, 36)))
+                Arguments.of("1,2,3,4,5,6", "7",
+                        new DrawnLottoNumber(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7)),
+                Arguments.of("10,20,30,40,41,45", "1",
+                        new DrawnLottoNumber(new Lotto(List.of(10, 20, 30, 40, 41, 45)), 1)),
+                Arguments.of("31,32,33,34,35,36", "37",
+                        new DrawnLottoNumber(new Lotto(List.of(31, 32, 33, 34, 35, 36)), 37))
         );
     }
 
     @Nested
-    @DisplayName("번호입력 예외케이스")
-    class InputToNumbersTest {
-
+    @DisplayName("당첨번호입력 예외케이스")
+    class NumbersInputTest {
+        private final String BONUS_NUMBER = "45";
         @ParameterizedTest
         @ValueSource(strings = {"a,b,c,d,e,f", " , , , , , ", "1,2,3,4,5,x", "1, 2, 3, 4, 5, 6"})
         void 숫자_쉼표_이외의_다른_문자가_입력된다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.inputToLotto(input))
+            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
         }
@@ -105,19 +108,58 @@ class ParserTest {
         @ValueSource(strings = {"1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5"})
         void 로또_숫자는_6개여야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.inputToLotto(input))
+            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
         }
-//        TODO: 숫자 범위 검증을 어디서 할지 고민
-//        @ParameterizedTest
-//        @ValueSource(strings = {"0,1,2,3,4,5", "1,2,3,4,5,46", "-1,0,1,2,3,4"})
-//        void 로또_숫자는_1이상_45이하여야_한다(String input) {
-//            // when, then
-//            assertThatThrownBy(() -> Parser.inputToNumbers(input))
-//                    .isInstanceOf(IllegalArgumentException.class)
-//                    .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
-//        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"0,1,2,3,4,5", "1,2,3,4,5,46"})
+        void 로또_숫자는_1이상_45이하여야_한다(String input) {
+            // when, then
+            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"1,1,2,3,4,5", "40,40,41,42,43,44", "40,41,42,43,44,44", "1,2,3,4,5,1"})
+        void 숫자는_중복되면_안된다(String input) {
+            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.NUMBER_DUPLICATED.getMessage());
+        }
     }
+
+    @Nested
+    @DisplayName("보너스번호입력 예외케이스")
+    class BonusNumberInputTest {
+        private final String NUMBERS = "1,2,3,4,5,6";
+        @ParameterizedTest
+        @ValueSource(strings = {"a", "-1", "45 ", " 45", " "})
+        void 숫자_쉼표_이외의_다른_문자가_입력된다(String input) {
+            // when, then
+            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"0", "46"})
+        void 로또_숫자는_1이상_45이하여야_한다(String input) {
+            // when, then
+            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
+        }
+        @ParameterizedTest
+        @ValueSource(strings = {"1", "2", "3", "4", "5", "6"})
+        void 보너스번호는_로또번호와_중복되면_안된다(String input) {
+            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.BONUS_NUMBER_DUPLICATED.getMessage());
+        }
+    }
+
 
 }

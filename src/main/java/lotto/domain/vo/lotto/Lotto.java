@@ -34,7 +34,7 @@ public class Lotto {
                 .count();
 
         if (distinctCount != numbers.size()) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATED.getMessage());
         }
     }
 

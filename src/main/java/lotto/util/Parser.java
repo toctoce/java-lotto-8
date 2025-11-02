@@ -13,7 +13,7 @@ import lotto.domain.vo.lotto.Lotto;
 
 public class Parser {
 
-    private static final Pattern INTEGER_PATTERN = Pattern.compile("-?\\d+");
+    private static final Pattern INTEGER_PATTERN = Pattern.compile("\\d+");
     private static final Pattern NUMBERS_PATTERN = Pattern.compile("[\\d+,]*\\d+");
 
     public static Budget InputToBudget(String input) {
@@ -23,6 +23,11 @@ public class Parser {
         return new Budget(amount);
     }
 
+    public static DrawnLottoNumber InputToDrawnLottoNumber(String numbersInput, String bonusNumberInput) {
+        Lotto lotto = inputToLotto(numbersInput);
+        Integer bonusNumber = inputToNumber(bonusNumberInput);
+        return new DrawnLottoNumber(lotto, bonusNumber);
+    }
 
     private static Lotto inputToLotto(String input) {
         validateNotBlank(input);
@@ -31,6 +36,12 @@ public class Parser {
         validateNumberCount(splitResult);
         List<Integer> numbers = splitResultToNumberList(splitResult);
         return new Lotto(numbers);
+    }
+
+    private static Integer inputToNumber(String input) {
+        validateNotBlank(input);
+        validateFormat(input, INTEGER_PATTERN);
+        return parseInt(input);
     }
 
     private static List<Integer> splitResultToNumberList(String[] splitResult) {
