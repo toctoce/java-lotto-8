@@ -15,7 +15,8 @@ public enum ErrorMessage {
     INVALID_NUMBER_COUNT("[ERROR] 로또 번호는 " + Constants.LOTTO_NUMBER_COUNT + "개여야 합니다."),
     INVALID_NUMBER_RANGE("[ERROR] 번호가 " + Constants.LOTTO_NUMBER_MIN + "이상 "
             + Constants.LOTTO_NUMBER_MAX + "이하여야 합니다."),
-    BONUS_NUMBER_DUPLICATE("[ERROR] 보너스 번호가 당첨 번호와 중복되었습니다."),
+    NUMBER_DUPLICATED("[ERROR] 번호가 중복되었습니다."),
+    BONUS_NUMBER_DUPLICATED("[ERROR] 보너스 번호가 당첨 번호와 중복되었습니다."),
 
     LOTTO_COUNT_NOT_POSITIVE("[ERROR] 로또 개수는 양수여야 합니다.");
     private final String message;
