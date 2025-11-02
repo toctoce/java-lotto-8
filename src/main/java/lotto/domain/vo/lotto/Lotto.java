@@ -18,13 +18,17 @@ public class Lotto {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
         }
 
-        long wrongLottoCount = numbers.stream()
-                .filter(number -> number < Constants.LOTTO_NUMBER_MIN || number > Constants.LOTTO_NUMBER_MAX)
-                .count();
-        if (wrongLottoCount != 0) {
+        numbers.forEach(this::validateNumber);
+    }
+
+    protected void validateNumber(Integer number) {
+        if (number < Constants.LOTTO_NUMBER_MIN || number > Constants.LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
         }
     }
 
+    public List<Integer> getNumbers() {
+        return this.numbers;
+    }
     // TODO: 추가 기능 구현
 }
