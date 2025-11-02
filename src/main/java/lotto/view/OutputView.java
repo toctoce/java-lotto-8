@@ -1,11 +1,11 @@
 package lotto.view;
 
 import lotto.domain.message.ViewMessage;
+import lotto.domain.vo.LottoCount;
 
 public class OutputView {
-    // TODO : 파라미터를 dto로 수정해야함.
-    public void writeLottoCount(int lottoCount) {
-        System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(Integer.toString(lottoCount))
+    public void writeLottoCount(LottoCount lottoCount) {
+        System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(lottoCount.toString())
                 + ViewMessage.NEW_LINE.getMessage());
     }
 
