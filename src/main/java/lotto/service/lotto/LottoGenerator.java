@@ -7,6 +7,7 @@ import lotto.domain.constants.Constants;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.vo.Budget;
+import lotto.domain.vo.LottoCount;
 import lotto.util.RandomNumberGenerator;
 
 public class LottoGenerator {
@@ -19,10 +20,9 @@ public class LottoGenerator {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lottos createLottos(Budget budget) {
-        int lottoCount = budget.calculateLottoCount();
+    public static Lottos createLottos(LottoCount lottoCount) {
 
-        List<Lotto> lottos = IntStream.range(0, lottoCount)
+        List<Lotto> lottos = IntStream.range(0, lottoCount.lottoCount())
                 .mapToObj(i -> createLotto())
                 .toList();
 
