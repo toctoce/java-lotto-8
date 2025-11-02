@@ -4,8 +4,8 @@ import lotto.domain.message.ViewMessage;
 
 public class OutputView {
     // TODO : 파라미터를 dto로 수정해야함.
-    public void writeLottoTicketCount(int lottoTicketCount) {
-        System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(Integer.toString(lottoTicketCount))
+    public void writeLottoCount(int lottoCount) {
+        System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(Integer.toString(lottoCount))
                 + ViewMessage.NEW_LINE.getMessage());
     }
 
