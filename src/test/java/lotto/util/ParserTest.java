@@ -47,7 +47,7 @@ class ParserTest {
             // when, then
             assertThatThrownBy(() -> Parser.InputToBudget(input))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.NOT_A_NUMBER.getMessage());
+                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
         }
 
         @ParameterizedTest

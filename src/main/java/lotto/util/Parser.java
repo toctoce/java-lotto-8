@@ -16,7 +16,7 @@ public class Parser {
 
     public static Budget InputToBudget(String input) {
         validateNotBlank(input);
-        validateInteger(input);
+        validateFormat(input, INTEGER_PATTERN);
         int amount = Integer.parseInt(input);
         return new Budget(amount);
     }
@@ -47,14 +47,6 @@ public class Parser {
     private static void validateNumberCount(String[] splitResult) {
         if (splitResult.length != Constants.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
-        }
-    }
-
-    private static void validateInteger(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER.getMessage());
         }
     }
 
