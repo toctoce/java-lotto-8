@@ -28,7 +28,7 @@ class LottoGeneratorTest {
 
         // then
         assertThat(lottos).isNotNull();
-        assertThat(lottos.getLottosCount()).isEqualTo(count);
+        assertThat(lottos.getLottoCount()).isEqualTo(count);
     }
 
 }

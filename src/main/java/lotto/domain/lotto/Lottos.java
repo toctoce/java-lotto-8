@@ -6,7 +6,7 @@ public record Lottos(List<Lotto> lottos) {
     public List<Lotto> getLottos() {
         return lottos;
     }
-    public int getLottosCount() {
+    public int getLottoCount() {
         return lottos.size();
     }
 }
