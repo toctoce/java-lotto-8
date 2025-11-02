@@ -1,6 +1,6 @@
 package lotto.util;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.constants.Constants;
@@ -23,7 +23,7 @@ class ParserTest {
         // when
         Budget budget = Parser.InputToBudget(input);
         // then
-        Assertions.assertThat(budget).isEqualTo(new Budget(expected));
+        assertThat(budget).isEqualTo(new Budget(expected));
     }
 
     @Nested
