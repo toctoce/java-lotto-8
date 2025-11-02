@@ -5,7 +5,7 @@ public enum ViewMessage {
     DRAWN_LOTTO_NUMBERS_INPUT_MESSAGE("당첨 번호를 입력해 주세요."),
     DRAWN_LOTTO_BONUS_NUMBER_INPUT_MESSAGE("보너스 번호를 입력해 주세요."),
 
-    LOTTO_TICKET_COUNT_OUTPUT_MESSAGE("%s개를 구매했습니다.", true),
+    LOTTO_COUNT_OUTPUT_MESSAGE("%s개를 구매했습니다.", true),
     DRAW_LOTTO_RESULT_OUTPUT_MESSAGE("당첨 통계"),
     RATE_OF_RETURN_OUTPUT_MESSAGE("총 수익률은 %s%%입니다.", true),
 
