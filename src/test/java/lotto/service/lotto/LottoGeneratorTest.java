@@ -2,8 +2,8 @@ package lotto.service.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.vo.lotto.Lotto;
+import lotto.domain.vo.lotto.Lottos;
 import lotto.domain.vo.Budget;
 import lotto.domain.vo.LottoCount;
 import org.junit.jupiter.api.Test;

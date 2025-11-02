@@ -2,11 +2,9 @@ package lotto.service.lotto;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import lotto.domain.constants.Constants;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.vo.Budget;
+import lotto.domain.vo.lotto.Lotto;
+import lotto.domain.vo.lotto.Lottos;
 import lotto.domain.vo.LottoCount;
 import lotto.util.RandomNumberGenerator;
 
