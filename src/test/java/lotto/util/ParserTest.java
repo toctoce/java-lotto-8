@@ -17,18 +17,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class ParserTest {
 
-    private Parser parser;
-
-    @BeforeEach
-    void setUp() {
-        parser  = new Parser();
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"1000,1000", "2000,2000", "200000000,200000000"})
     void 금액입력_정상동작(String input, int expected) {
         // when
-        Budget budget = parser.InputToBudget(input);
+        Budget budget = Parser.InputToBudget(input);
         // then
         Assertions.assertThat(budget).isEqualTo(new Budget(expected));
     }
@@ -40,7 +33,7 @@ class ParserTest {
         @NullSource()
         void 입력값이_존재해야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> parser.InputToBudget(input))
+            assertThatThrownBy(() -> Parser.InputToBudget(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.INPUT_REQUIRED.getMessage());
         }
@@ -49,7 +42,7 @@ class ParserTest {
         @ValueSource(strings = {"a", "1000원", "1,2", "1000 ", " "})
         void 숫자만_입력되어야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> parser.InputToBudget(input))
+            assertThatThrownBy(() -> Parser.InputToBudget(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.NOT_A_NUMBER.getMessage());
         }
@@ -58,7 +51,7 @@ class ParserTest {
         @ValueSource(strings = {"0", "-1000"})
         void 금액은_양수여야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> parser.InputToBudget(input))
+            assertThatThrownBy(() -> Parser.InputToBudget(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.AMOUNT_NOT_POSITIVE.getMessage());
         }
@@ -67,7 +60,7 @@ class ParserTest {
         @ValueSource(strings = {"100", "1001", "1100"})
         void 금액은_로또금액_1000의_배수여야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> parser.InputToBudget(input))
+            assertThatThrownBy(() -> Parser.InputToBudget(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.AMOUNT_NOT_MULTIPLE_OF_LOTTO_PRICE.getMessage(
                             Integer.toString(Constants.LOTTO_PRICE)

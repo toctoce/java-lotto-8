@@ -4,14 +4,14 @@ import lotto.domain.message.ErrorMessage;
 import lotto.domain.vo.Budget;
 
 public class Parser {
-    public Budget InputToBudget(String input) {
+    public static Budget InputToBudget(String input) {
         validateNotBlank(input);
         validateInteger(input);
         int amount = Integer.parseInt(input);
         return new Budget(amount);
     }
 
-    private void validateInteger(String input) {
+    private static void validateInteger(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -19,7 +19,7 @@ public class Parser {
         }
     }
 
-    private void validateNotBlank(String input) {
+    private static void validateNotBlank(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_REQUIRED.getMessage());
         }
