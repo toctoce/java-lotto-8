@@ -10,6 +10,8 @@ public enum ErrorMessage {
 
     INVALID_NUMBER_COUNT("[ERROR] 로또 번호는 6개여야 합니다."),
     INVALID_NUMBER_RANGE("[ERROR] 번호가 1이상 45이하여야 합니다."),
+
+    LOTTO_COUNT_NOT_POSITIVE("[ERROR] 로또 개수는 양수여야 합니다."),
     ;
     private final String message;
     private final boolean isFormatted;
