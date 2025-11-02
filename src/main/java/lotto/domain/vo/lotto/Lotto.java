@@ -18,13 +18,23 @@ public class Lotto {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
         }
-
         numbers.forEach(this::validateNumber);
+        validateNoDuplicates(numbers);
     }
 
     private void validateNumber(Integer number) {
         if (number < Constants.LOTTO_NUMBER_MIN || number > Constants.LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
+        }
+    }
+
+    private void validateNoDuplicates(List<Integer> numbers) {
+        long distinctCount = numbers.stream()
+                .distinct()
+                .count();
+
+        if (distinctCount != numbers.size()) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATE.getMessage());
         }
     }
 
