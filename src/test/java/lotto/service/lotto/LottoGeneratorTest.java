@@ -6,16 +6,24 @@ import lotto.domain.vo.lotto.Lotto;
 import lotto.domain.vo.lotto.Lottos;
 import lotto.domain.vo.Budget;
 import lotto.domain.vo.LottoCount;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoGeneratorTest {
 
+    private LottoGenerator lottoGenerator;
+
+    @BeforeEach
+    void setUp() {
+        lottoGenerator = new LottoGenerator();
+    }
+
     @Test
     void 로또_생성() {
         // given, when
-        Lotto lotto = LottoGenerator.createLotto();
+        Lotto lotto = lottoGenerator.createLotto();
 
         // then
         assertThat(lotto).isNotNull();
@@ -25,7 +33,7 @@ class LottoGeneratorTest {
     @CsvSource(value = {"1000,1", "5000,5", "10000,10", "200000000,200000"})
     void 로또_모두_생성(int amount, int count) {
         // given, when
-        Lottos lottos = LottoGenerator.createLottos(LottoCount.of(new Budget(amount)));
+        Lottos lottos = lottoGenerator.createLottos(LottoCount.of(new Budget(amount)));
 
         // then
         assertThat(lottos).isNotNull();
