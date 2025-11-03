@@ -1,12 +1,12 @@
-package lotto.domain.vo.lotto;
+package lotto.vo.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.domain.constants.Constants;
-import lotto.domain.message.ErrorMessage;
+import lotto.constants.Constants;
+import lotto.message.ErrorMessage;
 
 // 필드 추가 금지!!
 public class Lotto {

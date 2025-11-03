@@ -6,11 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
-import lotto.domain.constants.Constants;
-import lotto.domain.message.ErrorMessage;
-import lotto.domain.vo.Budget;
-import lotto.domain.vo.DrawnLottoNumber;
-import lotto.domain.vo.lotto.Lotto;
+import lotto.constants.Constants;
+import lotto.message.ErrorMessage;
+import lotto.vo.Budget;
+import lotto.vo.DrawnLottoNumber;
+import lotto.vo.lotto.Lotto;
 
 public class Parser {
 

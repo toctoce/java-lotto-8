@@ -1,12 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.vo.Budget;
-import lotto.domain.vo.DrawnLottoNumber;
-import lotto.domain.vo.LottoCount;
-import lotto.domain.vo.lotto.Lottos;
-import lotto.domain.vo.lottoresult.LottoResults;
-import lotto.service.lotto.LottoGenerator;
-import lotto.service.lotto.LottoResultGenerator;
+import lotto.vo.Budget;
+import lotto.vo.DrawnLottoNumber;
+import lotto.vo.LottoCount;
+import lotto.vo.lotto.Lottos;
+import lotto.vo.lottoresult.LottoResults;
+import lotto.service.LottoGenerator;
+import lotto.service.LottoResultGenerator;
 import lotto.util.Parser;
 import lotto.view.InputView;
 import lotto.view.OutputView;

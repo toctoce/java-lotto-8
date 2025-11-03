@@ -1,7 +1,7 @@
-package lotto.domain.vo.lottoresult;
+package lotto.vo.lottoresult;
 
 import java.util.Arrays;
-import lotto.domain.constants.Constants;
+import lotto.constants.Constants;
 
 public enum LottoRank {
 

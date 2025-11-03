@@ -1,11 +1,11 @@
 package lotto.view;
 
 import java.util.Map;
-import lotto.domain.message.ViewMessage;
-import lotto.domain.vo.LottoCount;
-import lotto.domain.vo.lotto.Lottos;
-import lotto.domain.vo.lottoresult.LottoRank;
-import lotto.domain.vo.lottoresult.LottoResults;
+import lotto.message.ViewMessage;
+import lotto.vo.LottoCount;
+import lotto.vo.lotto.Lottos;
+import lotto.vo.lottoresult.LottoRank;
+import lotto.vo.lottoresult.LottoResults;
 
 public class OutputView {
 

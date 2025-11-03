@@ -1,4 +1,4 @@
-package lotto.domain.vo.lottoresult;
+package lotto.vo.lottoresult;
 
 public record LottoResult(LottoRank rank) {
 }

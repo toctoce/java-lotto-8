@@ -2,10 +2,11 @@ package lotto.service.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.vo.lotto.Lotto;
-import lotto.domain.vo.lotto.Lottos;
-import lotto.domain.vo.Budget;
-import lotto.domain.vo.LottoCount;
+import lotto.vo.lotto.Lotto;
+import lotto.vo.lotto.Lottos;
+import lotto.vo.Budget;
+import lotto.vo.LottoCount;
+import lotto.service.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

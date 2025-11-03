@@ -1,7 +1,7 @@
-package lotto.domain.vo;
+package lotto.vo;
 
-import lotto.domain.constants.Constants;
-import lotto.domain.message.ErrorMessage;
+import lotto.constants.Constants;
+import lotto.message.ErrorMessage;
 
 public record LottoCount(int lottoCount) {
     public LottoCount {

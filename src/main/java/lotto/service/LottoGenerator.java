@@ -1,11 +1,11 @@
-package lotto.service.lotto;
+package lotto.service;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.domain.constants.Constants;
-import lotto.domain.vo.lotto.Lotto;
-import lotto.domain.vo.lotto.Lottos;
-import lotto.domain.vo.LottoCount;
+import lotto.constants.Constants;
+import lotto.vo.lotto.Lotto;
+import lotto.vo.lotto.Lottos;
+import lotto.vo.LottoCount;
 import lotto.util.RandomNumberGenerator;
 
 public class LottoGenerator {

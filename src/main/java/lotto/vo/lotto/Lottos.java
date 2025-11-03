@@ -1,8 +1,8 @@
-package lotto.domain.vo.lotto;
+package lotto.vo.lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.vo.LottoCount;
+import lotto.vo.LottoCount;
 
 public record Lottos(List<Lotto> lottos, LottoCount lottoCount) {
 

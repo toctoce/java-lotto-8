@@ -1,13 +1,13 @@
-package lotto.service.lotto;
+package lotto.service;
 
 import java.util.List;
-import lotto.domain.vo.Budget;
-import lotto.domain.vo.DrawnLottoNumber;
-import lotto.domain.vo.lotto.Lotto;
-import lotto.domain.vo.lotto.Lottos;
-import lotto.domain.vo.lottoresult.LottoRank;
-import lotto.domain.vo.lottoresult.LottoResult;
-import lotto.domain.vo.lottoresult.LottoResults;
+import lotto.vo.Budget;
+import lotto.vo.DrawnLottoNumber;
+import lotto.vo.lotto.Lotto;
+import lotto.vo.lotto.Lottos;
+import lotto.vo.lottoresult.LottoRank;
+import lotto.vo.lottoresult.LottoResult;
+import lotto.vo.lottoresult.LottoResults;
 
 public class LottoResultGenerator {
 

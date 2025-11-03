@@ -1,9 +1,9 @@
-package lotto.domain.vo.lottoresult;
+package lotto.vo.lottoresult;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.vo.Budget;
+import lotto.vo.Budget;
 
 public record LottoResults(Budget budget, List<LottoResult> results) {
 
