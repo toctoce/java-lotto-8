@@ -51,10 +51,11 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
+    @NullAndEmptySource
     @ValueSource(strings = {"1000j", "123", "45000 ", "3000원", "0", "-1"})
     void 금액_입력_예외케이스(String input) {
         assertSimpleTest(() -> {
-            runException(input);
+            runException(input, "1,2,3,4,5,6", "7");
             assertThat(output()).contains(ERROR_MESSAGE);
         });
     }
@@ -70,6 +71,7 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
+    @NullSource
     @ValueSource(strings = {"a", " ", "0", "-1", "46"})
     void 보너스_번호_입력_예외케이스(String input) {
         assertSimpleTest(() -> {
