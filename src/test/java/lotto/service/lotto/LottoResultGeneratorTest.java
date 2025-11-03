@@ -2,6 +2,7 @@ package lotto.service.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.vo.Budget;
@@ -53,7 +54,7 @@ class LottoResultGeneratorTest {
     }
 
     private static DrawnLottoNumber createDrawnLotto(List<Integer> numbers, Integer bonusNumber) {
-        Lotto lotto = createLotto(numbers);
+        Lotto lotto = createLotto(new ArrayList<>(numbers));
         return new DrawnLottoNumber(lotto, bonusNumber);
     }
 
@@ -71,7 +72,7 @@ class LottoResultGeneratorTest {
     }
 
     private static Lotto createLotto(List<Integer> lottoNumbers) {
-        return new Lotto(lottoNumbers);
+        return new Lotto(new ArrayList<>(lottoNumbers));
     }
 
     private Lottos createLottos(List<List<Integer>> lottoNumbers) {

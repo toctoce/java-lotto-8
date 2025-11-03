@@ -3,6 +3,7 @@ package lotto.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.constants.Constants;
@@ -83,13 +84,15 @@ class ParserTest {
     static Stream<Arguments> generateNumbersData() {
         return Stream.of(
                 Arguments.of("1,2,3,4,5,6", "7",
-                        new DrawnLottoNumber(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7)),
+                        new DrawnLottoNumber(new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7)),
                 Arguments.of("10,20,30,40,41,45", "1",
-                        new DrawnLottoNumber(new Lotto(List.of(10, 20, 30, 40, 41, 45)), 1)),
+                        new DrawnLottoNumber(new Lotto(new ArrayList<>(List.of(10, 20, 30, 40, 41, 45))), 1)),
                 Arguments.of("31,32,33,34,35,36", "37",
-                        new DrawnLottoNumber(new Lotto(List.of(31, 32, 33, 34, 35, 36)), 37))
+                        new DrawnLottoNumber(new Lotto(new ArrayList<>(List.of(31, 32, 33, 34, 35, 36))), 37))
         );
     }
+
+
 
     @Nested
     @DisplayName("당첨번호입력 예외케이스")

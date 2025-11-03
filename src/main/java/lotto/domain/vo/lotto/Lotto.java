@@ -1,5 +1,7 @@
 package lotto.domain.vo.lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,7 +17,10 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+
+        List<Integer> numbersCopy = new ArrayList<>(numbers);
+        Collections.sort(numbersCopy);
+        this.numbers = Collections.unmodifiableList(numbersCopy);
     }
 
     private void validate(List<Integer> numbers) {

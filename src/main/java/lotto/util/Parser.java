@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import java.util.stream.Collectors;
 import lotto.domain.constants.Constants;
 import lotto.domain.message.ErrorMessage;
 import lotto.domain.vo.Budget;
@@ -47,7 +48,7 @@ public class Parser {
     private static List<Integer> splitResultToNumberList(String[] splitResult) {
         return Arrays.stream(splitResult)
                 .map(Parser::parseInt)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private static String[] split(String input, String delimiter) {
