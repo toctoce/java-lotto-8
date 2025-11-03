@@ -53,4 +53,8 @@ public class OutputView {
                 ViewMessage.FIRST_MESSAGE
                         .getMessage(String.valueOf(rankCount.get(LottoRank.FIRST)));
     }
+
+    public void writeError(String message) {
+        System.out.println(NEW_LINE + "[ERROR] " + message + NEW_LINE);
+    }
 }
