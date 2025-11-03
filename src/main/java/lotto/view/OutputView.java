@@ -1,9 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
-import lotto.domain.constants.Constants;
 import lotto.domain.message.ViewMessage;
 import lotto.domain.vo.LottoCount;
+import lotto.domain.vo.lotto.Lotto;
 import lotto.domain.vo.lotto.Lottos;
 import lotto.domain.vo.lottoresult.LottoRank;
 import lotto.domain.vo.lottoresult.LottoResults;
@@ -13,12 +14,17 @@ public class OutputView {
     private final String DIVIDER = "---";
     private final String NEW_LINE = "\n";
 
-    public void writeLottoCount(LottoCount lottoCount) {
+    public void writePurchaseHistory(Lottos lottos) {
+        writeLottoCount(lottos.lottoCount());
+        writeLottos(lottos.lottos());
+    }
+
+    private void writeLottoCount(LottoCount lottoCount) {
         System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(lottoCount.toString())
                 + NEW_LINE);
     }
 
-    public void writeLottos(Lottos lottos) {
+    private void writeLottos(List<Lotto> lottos) {
         System.out.println(lottos);
     }
 
