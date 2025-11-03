@@ -1,5 +1,7 @@
 package lotto.domain.message;
 
+import lotto.domain.constants.Constants;
+
 public enum ViewMessage {
     BUDGET_INPUT_MESSAGE("구입금액을 입력해 주세요."),
     DRAWN_LOTTO_NUMBERS_INPUT_MESSAGE("당첨 번호를 입력해 주세요."),
@@ -9,11 +11,11 @@ public enum ViewMessage {
     DRAW_LOTTO_RESULT_OUTPUT_MESSAGE("당첨 통계"),
     RATE_OF_RETURN_OUTPUT_MESSAGE("총 수익률은 %s%%입니다.", true),
 
-    MATCH_3_MESSAGE("3개 일치 (%s) - %s개", true),
-    MATCH_4_MESSAGE("4개 일치 (%s) - %s개", true),
-    MATCH_5_MESSAGE("5개 일치 (%s) - %s개", true),
-    MATCH_5_AND_BONUS_MESSAGE("5개 일치, 보너스 볼 일치 (%s) - %s개", true),
-    MATCH_6_MESSAGE("6개 일치 (%s) - %s개", true),
+    FIRST_MESSAGE("6개 일치 (" + Constants.FIRST_PRIZE + ") - %s개", true),
+    SECOND_MESSAGE("5개 일치, 보너스 볼 일치 (" + Constants.SECOND_PRIZE + ") - %s개", true),
+    THIRD_MESSAGE("5개 일치 (" + Constants.THIRD_PRIZE + ") - %s개", true),
+    FOURTH_MESSAGE("4개 일치 (" + Constants.FOURTH_PRIZE + ") - %s개", true),
+    FIFTH_MESSAGE("3개 일치 (" + Constants.FIFTH_PRIZE + ") - %s개", true),
 
     DIVIDER("---"),
     NEW_LINE("\n");
