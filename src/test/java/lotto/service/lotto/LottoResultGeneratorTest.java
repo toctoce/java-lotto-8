@@ -4,13 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.vo.Budget;
 import lotto.domain.vo.DrawnLottoNumber;
 import lotto.domain.vo.lotto.Lotto;
 import lotto.domain.vo.lotto.Lottos;
-import lotto.domain.vo.lottoresult.LottoRank;
 import lotto.domain.vo.lottoresult.LottoResults;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,8 +28,8 @@ class LottoResultGeneratorTest {
     void createLottoResults(DrawnLottoNumber drawnLottoNumber, long expectedPrize) {
         Lottos lottos = dummyLottos();
 
-        LottoResults lottoResults = lottoResultGenerator.createLottoResults(lottos, drawnLottoNumber);
-        long prize = lottoResults.prize();
+        LottoResults lottoResults = lottoResultGenerator.createLottoResults(new Budget(1000), lottos, drawnLottoNumber);
+        long prize = lottoResults.getPrize();
 
         assertThat(prize).isEqualTo(expectedPrize);
     }
