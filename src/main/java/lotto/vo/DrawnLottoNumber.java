@@ -1,8 +1,8 @@
 package lotto.vo;
 
-import lotto.constants.Constants;
-import lotto.exception.LottoException;
-import lotto.message.ErrorMessage;
+import lotto.common.constants.Constants;
+import lotto.common.exception.LottoException;
+import lotto.common.message.ErrorMessage;
 import lotto.vo.lotto.Lotto;
 
 public record DrawnLottoNumber(Lotto lotto, Integer bonusNumber) {

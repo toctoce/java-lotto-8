@@ -1,7 +1,7 @@
-package lotto.message;
+package lotto.common.message;
 
 import java.text.DecimalFormat;
-import lotto.constants.Constants;
+import lotto.common.constants.Constants;
 
 public enum ViewMessage {
     BUDGET_INPUT_MESSAGE("구입금액을 입력해 주세요."),

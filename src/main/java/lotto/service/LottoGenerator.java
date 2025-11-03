@@ -2,7 +2,7 @@ package lotto.service;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.constants.Constants;
+import lotto.common.constants.Constants;
 import lotto.vo.lotto.Lotto;
 import lotto.vo.lotto.Lottos;
 import lotto.vo.LottoCount;
@@ -19,7 +19,6 @@ public class LottoGenerator {
     }
 
     public Lottos createLottos(LottoCount lottoCount) {
-
         List<Lotto> lottos = IntStream.range(0, lottoCount.lottoCount())
                 .mapToObj(i -> createLotto())
                 .toList();

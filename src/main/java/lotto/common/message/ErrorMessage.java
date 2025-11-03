@@ -1,6 +1,6 @@
-package lotto.message;
+package lotto.common.message;
 
-import lotto.constants.Constants;
+import lotto.common.constants.Constants;
 
 public enum ErrorMessage {
     NOT_A_NUMBER("숫자만 입력해주세요."),

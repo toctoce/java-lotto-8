@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
-import lotto.constants.Constants;
-import lotto.exception.LottoException;
-import lotto.message.ErrorMessage;
+import lotto.common.constants.Constants;
+import lotto.common.exception.LottoException;
+import lotto.common.message.ErrorMessage;
 import lotto.vo.Budget;
 import lotto.vo.DrawnLottoNumber;
 import lotto.vo.lotto.Lotto;
@@ -86,5 +86,4 @@ public class Parser {
             throw new LottoException(ErrorMessage.INVALID_INPUT_FORMAT);
         }
     }
-
 }

@@ -10,7 +10,6 @@ import lotto.vo.lottoresult.LottoResult;
 import lotto.vo.lottoresult.LottoResults;
 
 public class LottoResultGenerator {
-
     public LottoResults createLottoResults(Budget budget, Lottos lottos, DrawnLottoNumber drawnLottoNumber) {
         List<LottoResult> lottoResults = lottos.lottos()
                 .stream()

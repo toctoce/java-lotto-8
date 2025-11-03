@@ -1,8 +1,8 @@
 package lotto.vo;
 
-import lotto.constants.Constants;
-import lotto.exception.LottoException;
-import lotto.message.ErrorMessage;
+import lotto.common.constants.Constants;
+import lotto.common.exception.LottoException;
+import lotto.common.message.ErrorMessage;
 
 public record LottoCount(int lottoCount) {
     public LottoCount {

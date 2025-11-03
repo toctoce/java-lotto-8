@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.Map;
-import lotto.message.ViewMessage;
+import lotto.common.message.ViewMessage;
 import lotto.vo.LottoCount;
 import lotto.vo.lotto.Lottos;
 import lotto.vo.lottoresult.LottoRank;

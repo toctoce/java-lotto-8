@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.constants.Constants;
-import lotto.exception.LottoException;
-import lotto.message.ErrorMessage;
+import lotto.common.constants.Constants;
+import lotto.common.exception.LottoException;
+import lotto.common.message.ErrorMessage;
 
 // 필드 추가 금지!!
 public class Lotto {
