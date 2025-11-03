@@ -4,15 +4,11 @@ import lotto.domain.constants.Constants;
 import lotto.domain.message.ErrorMessage;
 import lotto.domain.vo.lotto.Lotto;
 
-public record DrawnLottoNumber(Lotto numbers, Integer bonusNumber) {
+public record DrawnLottoNumber(Lotto lotto, Integer bonusNumber) {
 
     public DrawnLottoNumber {
         validateNumber(bonusNumber);
-        validateNoDuplicates(numbers, bonusNumber);
-    }
-
-    public Integer getBonusNumber() {
-        return bonusNumber;
+        validateNoDuplicates(lotto, bonusNumber);
     }
 
     private void validateNumber(Integer number) {
