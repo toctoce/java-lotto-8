@@ -1,5 +1,6 @@
 package lotto.domain.message;
 
+import java.text.DecimalFormat;
 import lotto.domain.constants.Constants;
 
 public enum ViewMessage {
@@ -11,14 +12,12 @@ public enum ViewMessage {
     DRAW_LOTTO_RESULT_OUTPUT_MESSAGE("당첨 통계"),
     RATE_OF_RETURN_OUTPUT_MESSAGE("총 수익률은 %s%%입니다.", true),
 
-    FIRST_MESSAGE("6개 일치 (" + Constants.FIRST_PRIZE + ") - %s개", true),
-    SECOND_MESSAGE("5개 일치, 보너스 볼 일치 (" + Constants.SECOND_PRIZE + ") - %s개", true),
-    THIRD_MESSAGE("5개 일치 (" + Constants.THIRD_PRIZE + ") - %s개", true),
-    FOURTH_MESSAGE("4개 일치 (" + Constants.FOURTH_PRIZE + ") - %s개", true),
-    FIFTH_MESSAGE("3개 일치 (" + Constants.FIFTH_PRIZE + ") - %s개", true),
+    FIRST_MESSAGE("6개 일치 (" + longToWon(Constants.FIRST_PRIZE) + ") - %s개", true),
+    SECOND_MESSAGE("5개 일치, 보너스 볼 일치 (" + longToWon(Constants.SECOND_PRIZE) + ") - %s개", true),
+    THIRD_MESSAGE("5개 일치 (" + longToWon(Constants.THIRD_PRIZE) + ") - %s개", true),
+    FOURTH_MESSAGE("4개 일치 (" + longToWon(Constants.FOURTH_PRIZE) + ") - %s개", true),
+    FIFTH_MESSAGE("3개 일치 (" + longToWon(Constants.FIFTH_PRIZE) + ") - %s개", true);
 
-    DIVIDER("---"),
-    NEW_LINE("\n");
 
     private final String message;
     private final boolean isFormatted;
@@ -42,5 +41,11 @@ public enum ViewMessage {
             return String.format(message, arguments);
         }
         return message;
+    }
+
+    private static String longToWon(long amount) {
+        DecimalFormat formatter = new DecimalFormat("###,###");
+        String formattedAmount = formatter.format(amount);
+        return formattedAmount + "원";
     }
 }
