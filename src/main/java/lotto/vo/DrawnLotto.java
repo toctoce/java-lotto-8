@@ -5,9 +5,9 @@ import lotto.common.exception.LottoException;
 import lotto.common.message.ErrorMessage;
 import lotto.vo.lotto.Lotto;
 
-public record DrawnLottoNumber(Lotto lotto, Integer bonusNumber) {
+public record DrawnLotto(Lotto lotto, Integer bonusNumber) {
 
-    public DrawnLottoNumber {
+    public DrawnLotto {
         validateNumber(bonusNumber);
         validateNoDuplicates(lotto, bonusNumber);
     }

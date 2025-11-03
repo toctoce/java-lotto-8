@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.vo.Budget;
-import lotto.vo.DrawnLottoNumber;
+import lotto.vo.DrawnLotto;
 import lotto.vo.LottoCount;
 import lotto.vo.lotto.Lottos;
 import lotto.vo.lottoresult.LottoResults;
@@ -34,27 +34,27 @@ public class LottoController {
         Lottos lottos = createLottos(budget);
         outputView.writePurchaseHistory(lottos);
 
-        DrawnLottoNumber drawnLottoNumber = createDrawnLottoNumberFromUserInput();
-        LottoResults lottoResults = createLottoResults(budget, lottos, drawnLottoNumber);
+        DrawnLotto drawnLotto = createDrawnLottoFromUserInput();
+        LottoResults lottoResults = createLottoResults(budget, lottos, drawnLotto);
         outputView.writeLottoResults(lottoResults);
     }
 
-    private LottoResults createLottoResults(Budget budget, Lottos lottos, DrawnLottoNumber drawnLottoNumber) {
-        return lottoResultGenerator.createLottoResults(budget, lottos, drawnLottoNumber);
+    private LottoResults createLottoResults(Budget budget, Lottos lottos, DrawnLotto drawnLotto) {
+        return lottoResultGenerator.createLottoResults(budget, lottos, drawnLotto);
     }
 
     private Lottos createLottos(Budget budget) {
         return lottoGenerator.createLottos(LottoCount.of(budget));
     }
 
-    private DrawnLottoNumber createDrawnLottoNumberFromUserInput() {
+    private DrawnLotto createDrawnLottoFromUserInput() {
         try {
-            String drawnLottoNumbersInput = inputView.readDrawnLottoNumbers();
-            String drawnLottoBonusNumber = inputView.readDrawnLottoBonusNumber();
-            return Parser.InputToDrawnLottoNumber(drawnLottoNumbersInput, drawnLottoBonusNumber);
+            String numbersInput = inputView.readDrawnLottoNumbers();
+            String bonusNumberInput = inputView.readDrawnLottoBonusNumber();
+            return Parser.InputToDrawnLotto(numbersInput, bonusNumberInput);
         } catch (IllegalArgumentException e) {
             outputView.writeError(e.getMessage());
-            return createDrawnLottoNumberFromUserInput();
+            return createDrawnLottoFromUserInput();
         }
     }
 

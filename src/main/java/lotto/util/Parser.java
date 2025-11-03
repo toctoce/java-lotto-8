@@ -10,7 +10,7 @@ import lotto.common.constants.Constants;
 import lotto.common.exception.LottoException;
 import lotto.common.message.ErrorMessage;
 import lotto.vo.Budget;
-import lotto.vo.DrawnLottoNumber;
+import lotto.vo.DrawnLotto;
 import lotto.vo.lotto.Lotto;
 
 public class Parser {
@@ -25,10 +25,10 @@ public class Parser {
         return new Budget(amount);
     }
 
-    public static DrawnLottoNumber InputToDrawnLottoNumber(String numbersInput, String bonusNumberInput) {
+    public static DrawnLotto InputToDrawnLotto(String numbersInput, String bonusNumberInput) {
         Lotto lotto = inputToLotto(numbersInput);
         Integer bonusNumber = inputToNumber(bonusNumberInput);
-        return new DrawnLottoNumber(lotto, bonusNumber);
+        return new DrawnLotto(lotto, bonusNumber);
     }
 
     private static Lotto inputToLotto(String input) {

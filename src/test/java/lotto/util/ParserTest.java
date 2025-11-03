@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import lotto.common.exception.LottoException;
 import lotto.common.message.ErrorMessage;
 import lotto.vo.Budget;
-import lotto.vo.DrawnLottoNumber;
+import lotto.vo.DrawnLotto;
 import lotto.vo.lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -72,21 +72,21 @@ class ParserTest {
 
     @ParameterizedTest
     @MethodSource("generateNumbersData")
-    void 당첨번호_보너스번호_입력_정상동작(String inputNumbers, String bonusNumber, DrawnLottoNumber expected) {
+    void 당첨번호_보너스번호_입력_정상동작(String inputNumbers, String bonusNumber, DrawnLotto expected) {
         // when
-        DrawnLottoNumber drawnLottoNumber = Parser.InputToDrawnLottoNumber(inputNumbers, bonusNumber);
+        DrawnLotto drawnLotto = Parser.InputToDrawnLotto(inputNumbers, bonusNumber);
         // then
-        assertThat(drawnLottoNumber).isEqualTo(expected);
+        assertThat(drawnLotto).isEqualTo(expected);
     }
 
     static Stream<Arguments> generateNumbersData() {
         return Stream.of(
                 Arguments.of("1,2,3,4,5,6", "7",
-                        new DrawnLottoNumber(new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7)),
+                        new DrawnLotto(new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7)),
                 Arguments.of("10,20,30,40,41,45", "1",
-                        new DrawnLottoNumber(new Lotto(new ArrayList<>(List.of(10, 20, 30, 40, 41, 45))), 1)),
+                        new DrawnLotto(new Lotto(new ArrayList<>(List.of(10, 20, 30, 40, 41, 45))), 1)),
                 Arguments.of("31,32,33,34,35,36", "37",
-                        new DrawnLottoNumber(new Lotto(new ArrayList<>(List.of(31, 32, 33, 34, 35, 36))), 37))
+                        new DrawnLotto(new Lotto(new ArrayList<>(List.of(31, 32, 33, 34, 35, 36))), 37))
         );
     }
 
@@ -100,7 +100,7 @@ class ParserTest {
         @ValueSource(strings = {"a,b,c,d,e,f", " , , , , , ", "1,2,3,4,5,x", "1, 2, 3, 4, 5, 6"})
         void 숫자_쉼표_이외의_다른_문자가_입력된다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
+            assertThatThrownBy(() -> Parser.InputToDrawnLotto(input, BONUS_NUMBER))
                     .isInstanceOf(LottoException.class)
                     .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getFormatMessage());
         }
@@ -109,7 +109,7 @@ class ParserTest {
         @ValueSource(strings = {"1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5"})
         void 로또_숫자는_6개여야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
+            assertThatThrownBy(() -> Parser.InputToDrawnLotto(input, BONUS_NUMBER))
                     .isInstanceOf(LottoException.class)
                     .hasMessage(ErrorMessage.INVALID_NUMBER_COUNT.getFormatMessage());
         }
@@ -118,7 +118,7 @@ class ParserTest {
         @ValueSource(strings = {"0,1,2,3,4,5", "1,2,3,4,5,46"})
         void 로또_숫자는_1이상_45이하여야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
+            assertThatThrownBy(() -> Parser.InputToDrawnLotto(input, BONUS_NUMBER))
                     .isInstanceOf(LottoException.class)
                     .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getFormatMessage());
         }
@@ -126,7 +126,7 @@ class ParserTest {
         @ParameterizedTest
         @ValueSource(strings = {"1,1,2,3,4,5", "40,40,41,42,43,44", "40,41,42,43,44,44", "1,2,3,4,5,1"})
         void 숫자는_중복되면_안된다(String input) {
-            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
+            assertThatThrownBy(() -> Parser.InputToDrawnLotto(input, BONUS_NUMBER))
                     .isInstanceOf(LottoException.class)
                     .hasMessage(ErrorMessage.NUMBER_DUPLICATED.getFormatMessage());
         }
@@ -140,7 +140,7 @@ class ParserTest {
         @ValueSource(strings = {"a", "-1", "45 ", " 45", " "})
         void 숫자_쉼표_이외의_다른_문자가_입력된다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
+            assertThatThrownBy(() -> Parser.InputToDrawnLotto(NUMBERS, input))
                     .isInstanceOf(LottoException.class)
                     .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getFormatMessage());
         }
@@ -149,14 +149,14 @@ class ParserTest {
         @ValueSource(strings = {"0", "46"})
         void 로또_숫자는_1이상_45이하여야_한다(String input) {
             // when, then
-            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
+            assertThatThrownBy(() -> Parser.InputToDrawnLotto(NUMBERS, input))
                     .isInstanceOf(LottoException.class)
                     .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getFormatMessage());
         }
         @ParameterizedTest
         @ValueSource(strings = {"1", "2", "3", "4", "5", "6"})
         void 보너스번호는_로또번호와_중복되면_안된다(String input) {
-            assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
+            assertThatThrownBy(() -> Parser.InputToDrawnLotto(NUMBERS, input))
                     .isInstanceOf(LottoException.class)
                     .hasMessage(ErrorMessage.BONUS_NUMBER_DUPLICATED.getFormatMessage());
         }

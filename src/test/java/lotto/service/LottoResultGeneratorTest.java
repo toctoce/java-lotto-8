@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.vo.Budget;
-import lotto.vo.DrawnLottoNumber;
+import lotto.vo.DrawnLotto;
 import lotto.vo.LottoCount;
 import lotto.vo.lotto.Lotto;
 import lotto.vo.lotto.Lottos;
@@ -27,10 +27,10 @@ class LottoResultGeneratorTest {
 
     @ParameterizedTest
     @MethodSource(value = "generateData")
-    void createLottoResults(DrawnLottoNumber drawnLottoNumber, long expectedPrize) {
+    void createLottoResults(DrawnLotto drawnLotto, long expectedPrize) {
         Lottos lottos = dummyLottos();
 
-        LottoResults lottoResults = lottoResultGenerator.createLottoResults(new Budget(1000), lottos, drawnLottoNumber);
+        LottoResults lottoResults = lottoResultGenerator.createLottoResults(new Budget(1000), lottos, drawnLotto);
         long prize = lottoResults.getPrize();
 
         assertThat(prize).isEqualTo(expectedPrize);
@@ -53,9 +53,9 @@ class LottoResultGeneratorTest {
         );
     }
 
-    private static DrawnLottoNumber createDrawnLotto(List<Integer> numbers, Integer bonusNumber) {
+    private static DrawnLotto createDrawnLotto(List<Integer> numbers, Integer bonusNumber) {
         Lotto lotto = createLotto(new ArrayList<>(numbers));
-        return new DrawnLottoNumber(lotto, bonusNumber);
+        return new DrawnLotto(lotto, bonusNumber);
     }
 
     private Lottos dummyLottos() {
