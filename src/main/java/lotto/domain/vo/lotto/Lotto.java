@@ -2,11 +2,15 @@ package lotto.domain.vo.lotto;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.domain.constants.Constants;
 import lotto.domain.message.ErrorMessage;
 
 // 필드 추가 금지!!
 public class Lotto {
+    public static final String START_FORMAT = "[";
+    public static final String END_FORMAT = "]";
+    public static final String DELIMITER = ", ";
     private final List<Integer> numbers; // private 변경 금지
 
     public Lotto(List<Integer> numbers) {
@@ -64,5 +68,13 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hashCode(getNumbers());
+    }
+
+    @Override
+    public String toString() {
+        String joinedNumbers = this.numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER));
+        return START_FORMAT + joinedNumbers + END_FORMAT;
     }
 }
