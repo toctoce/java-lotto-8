@@ -9,7 +9,7 @@ public enum ErrorMessage {
     INVALID_INPUT_FORMAT("입력 형식이 올바르지 않습니다."),
 
     AMOUNT_NOT_POSITIVE("금액은 양수여야 합니다."),
-    AMOUNT_NOT_MULTIPLE_OF_LOTTO_PRICE("금액이 " + Constants.LOTTO_PRICE + "의 배수가 아닙니다.", true),
+    AMOUNT_NOT_MULTIPLE_OF_LOTTO_PRICE("금액이 " + Constants.LOTTO_PRICE + "의 배수가 아닙니다."),
 
     INVALID_NUMBER_COUNT("로또 번호는 " + Constants.LOTTO_NUMBER_COUNT + "개여야 합니다."),
     INVALID_NUMBER_RANGE("번호가 " + Constants.LOTTO_NUMBER_MIN + "이상 "
@@ -20,16 +20,9 @@ public enum ErrorMessage {
     LOTTO_COUNT_NOT_POSITIVE("로또 개수는 양수여야 합니다.");
 
     private final String message;
-    private final boolean isFormatted;
 
     ErrorMessage(String message) {
         this.message = message;
-        this.isFormatted = false;
-    }
-
-    ErrorMessage(String message, boolean isFormatted) {
-        this.message = message;
-        this.isFormatted = isFormatted;
     }
 
     public String getFormatMessage() {
