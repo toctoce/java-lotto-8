@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 import lotto.constants.Constants;
+import lotto.exception.LottoException;
 import lotto.message.ErrorMessage;
 import lotto.vo.Budget;
 import lotto.vo.DrawnLottoNumber;
@@ -55,7 +56,7 @@ public class Parser {
         try {
             return input.split(delimiter);
         } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
+            throw new LottoException(ErrorMessage.INVALID_INPUT_FORMAT);
         }
     }
 
@@ -63,26 +64,26 @@ public class Parser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_AN_INTEGER.getMessage());
+            throw new LottoException(ErrorMessage.NOT_AN_INTEGER);
         }
     }
 
     private static void validateNumberCount(String[] splitResult) {
         if (splitResult.length != Constants.LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
+            throw new LottoException(ErrorMessage.INVALID_NUMBER_COUNT);
         }
     }
 
     private static void validateNotBlank(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.INPUT_REQUIRED.getMessage());
+            throw new LottoException(ErrorMessage.INPUT_REQUIRED);
         }
     }
 
     private static void validateFormat(String input, Pattern pattern) {
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
+            throw new LottoException(ErrorMessage.INVALID_INPUT_FORMAT);
         }
     }
 

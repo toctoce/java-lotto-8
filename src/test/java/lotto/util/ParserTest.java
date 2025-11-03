@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.constants.Constants;
+import lotto.exception.LottoException;
 import lotto.message.ErrorMessage;
 import lotto.vo.Budget;
 import lotto.vo.DrawnLottoNumber;
@@ -39,8 +39,8 @@ class ParserTest {
         void 입력값이_존재해야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToBudget(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INPUT_REQUIRED.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.INPUT_REQUIRED.getFormatMessage());
         }
 
         @ParameterizedTest
@@ -48,8 +48,8 @@ class ParserTest {
         void 숫자만_입력되어야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToBudget(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getFormatMessage());
         }
 
         @ParameterizedTest
@@ -57,7 +57,7 @@ class ParserTest {
         void 금액은_양수여야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToBudget(input))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(LottoException.class);
         }
 
         @ParameterizedTest
@@ -65,10 +65,8 @@ class ParserTest {
         void 금액은_로또금액_1000의_배수여야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToBudget(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.AMOUNT_NOT_MULTIPLE_OF_LOTTO_PRICE.getMessage(
-                            Integer.toString(Constants.LOTTO_PRICE)
-                    ));
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.AMOUNT_NOT_MULTIPLE_OF_LOTTO_PRICE.getFormatMessage());
         }
     }
 
@@ -103,8 +101,8 @@ class ParserTest {
         void 숫자_쉼표_이외의_다른_문자가_입력된다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getFormatMessage());
         }
 
         @ParameterizedTest
@@ -112,8 +110,8 @@ class ParserTest {
         void 로또_숫자는_6개여야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.INVALID_NUMBER_COUNT.getFormatMessage());
         }
 
         @ParameterizedTest
@@ -121,16 +119,16 @@ class ParserTest {
         void 로또_숫자는_1이상_45이하여야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getFormatMessage());
         }
 
         @ParameterizedTest
         @ValueSource(strings = {"1,1,2,3,4,5", "40,40,41,42,43,44", "40,41,42,43,44,44", "1,2,3,4,5,1"})
         void 숫자는_중복되면_안된다(String input) {
             assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(input, BONUS_NUMBER))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.NUMBER_DUPLICATED.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.NUMBER_DUPLICATED.getFormatMessage());
         }
     }
 
@@ -143,8 +141,8 @@ class ParserTest {
         void 숫자_쉼표_이외의_다른_문자가_입력된다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.INVALID_INPUT_FORMAT.getFormatMessage());
         }
 
         @ParameterizedTest
@@ -152,15 +150,15 @@ class ParserTest {
         void 로또_숫자는_1이상_45이하여야_한다(String input) {
             // when, then
             assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.INVALID_NUMBER_RANGE.getFormatMessage());
         }
         @ParameterizedTest
         @ValueSource(strings = {"1", "2", "3", "4", "5", "6"})
         void 보너스번호는_로또번호와_중복되면_안된다(String input) {
             assertThatThrownBy(() -> Parser.InputToDrawnLottoNumber(NUMBERS, input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.BONUS_NUMBER_DUPLICATED.getMessage());
+                    .isInstanceOf(LottoException.class)
+                    .hasMessage(ErrorMessage.BONUS_NUMBER_DUPLICATED.getFormatMessage());
         }
     }
 

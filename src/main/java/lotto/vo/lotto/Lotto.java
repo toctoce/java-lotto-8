@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.constants.Constants;
+import lotto.exception.LottoException;
 import lotto.message.ErrorMessage;
 
 // 필드 추가 금지!!
@@ -25,7 +26,7 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_COUNT.getMessage());
+            throw new LottoException(ErrorMessage.INVALID_NUMBER_COUNT);
         }
         numbers.forEach(this::validateNumber);
         validateNoDuplicates(numbers);
@@ -33,7 +34,7 @@ public class Lotto {
 
     private void validateNumber(Integer number) {
         if (number < Constants.LOTTO_NUMBER_MIN || number > Constants.LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_RANGE.getMessage());
+            throw new LottoException(ErrorMessage.INVALID_NUMBER_RANGE);
         }
     }
 
@@ -43,7 +44,7 @@ public class Lotto {
                 .count();
 
         if (distinctCount != numbers.size()) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATED.getMessage());
+            throw new LottoException(ErrorMessage.NUMBER_DUPLICATED);
         }
     }
 

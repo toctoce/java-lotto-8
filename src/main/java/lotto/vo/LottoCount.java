@@ -1,12 +1,13 @@
 package lotto.vo;
 
 import lotto.constants.Constants;
+import lotto.exception.LottoException;
 import lotto.message.ErrorMessage;
 
 public record LottoCount(int lottoCount) {
     public LottoCount {
         if (lottoCount <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_COUNT_NOT_POSITIVE.getMessage());
+            throw new LottoException(ErrorMessage.LOTTO_COUNT_NOT_POSITIVE);
         }
     }
 
