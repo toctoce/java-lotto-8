@@ -1,4 +1,4 @@
-package lotto.domain.vo.lottoresult;
+package lotto.vo.lottoresult;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
