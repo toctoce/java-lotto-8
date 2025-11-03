@@ -28,7 +28,7 @@ public class OutputView {
         System.out.println(lottos);
     }
 
-    public void writeDrawLottoResult(LottoResults lottoResults) {
+    public void writeLottoResults(LottoResults lottoResults) {
         System.out.println(ViewMessage.DRAW_LOTTO_RESULT_OUTPUT_MESSAGE.getMessage());
         System.out.println(DIVIDER);
         System.out.println(resultFormat(lottoResults.getRankCount()));
