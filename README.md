@@ -68,7 +68,7 @@
 
 # 구현할 기능
 ## 프로세스 흐름 제어
-- 입력 -> 로또 구매 -> 당첨 번호 입력 -> 로또 결과 확인 -> 당첨금 계산 -> 출력
+- 구입 금액 입력 -> 로또 구매 -> 당첨 번호 입력 -> 로또 결과 확인 -> 당첨금 계산 -> 출력
 
 ## 의존성 주입
 - 의존성 주입
@@ -80,25 +80,20 @@
 - 보너스 번호 입력
 ### 출력 담당
 - 발행한 로또 수량과 번호 출력
-- 당첨 내역 출력
-- 수익률 출력
+- 당첨 내역, 수익률 출력
 
 ## 로또
 ### 로또 발행
 - 당첨 번호 저장
 ### 번호 매칭
-- 당첨 번호와 구매한 로또 번호를 비교
+- 당첨 번호와 구매한 로또 번호를 비교해 등수 계산
 ### 당첨금 계산
 - 당첨된 로또 번호에 따라 당첨금 계산
 - 수익률 계산
 
 ## 기타
 ### 랜덤 숫자 생성기
-- 0부터 45 사이의 번호를 생성
-### 계산기
-- 덧셈 연산
-- 곱셈 연산
-- 퍼센트 연산
+- 1부터 45 사이의 번호를 생성
 ### 입력 파싱
 - 사용자 입력으로 돈 객체 생성
 - 당첨 번호와 보너스 번호로 로또 당첨 번호 객체 생성
@@ -120,23 +115,39 @@
   - 당첨 번호와 중복됨
 
 # 프로젝트 구조
-controller
-- LottoController
-domain
-- Lotto
-  - Lotto
-  - Lottos
-- vo
-  - Budget
-- message
-  - ErrorMessage
-  - ViewMessage
-- constants
-  - Constants
-util
-- RandomNumberGenerator
-- Calculator
-- Parser
-view
-- InputView
-- OutputView
+```text
+lotto
+├── Application.java
+├── common
+│   ├── constants
+│   │   └── Constants.java
+│   ├── exception
+│   │   └── LottoException.java
+│   └── message
+│       ├── ErrorMessage.java
+│       └── ViewMessage.java
+├── config
+│   └── AppConfig.java
+├── controller
+│   └── LottoController.java
+├── service
+│   ├── LottoGenerator.java
+│   └── LottoResultGenerator.java
+├── util
+│   ├── Parser.java
+│   └── RandomNumberGenerator.java
+├── view
+│   ├── InputView.java
+│   └── OutputView.java
+└── vo
+    ├── Budget.java
+    ├── DrawnLottoNumber.java
+    ├── LottoCount.java
+    ├── lotto
+    │   ├── Lotto.java
+    │   └── Lottos.java
+    └── lottoresult
+        ├── LottoRank.java
+        ├── LottoResult.java
+        └── LottoResults.java
+```
