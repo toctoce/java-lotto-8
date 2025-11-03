@@ -41,7 +41,16 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return this.numbers;
     }
-    // TODO: 추가 기능 구현
+
+    public int countMatches(Lotto lotto) {
+        return (int) this.numbers.stream()
+                .filter(lotto.numbers::contains) // 내부 필드 접근은 허용
+                .count();
+    }
+
+    public boolean containsNumber(Integer number) {
+        return this.numbers.contains(number);
+    }
 
     @Override
     public boolean equals(Object o) {
