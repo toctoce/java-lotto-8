@@ -1,32 +1,53 @@
 package lotto.view;
 
+import java.util.Map;
+import lotto.domain.constants.Constants;
 import lotto.domain.message.ViewMessage;
 import lotto.domain.vo.LottoCount;
 import lotto.domain.vo.lotto.Lottos;
+import lotto.domain.vo.lottoresult.LottoRank;
+import lotto.domain.vo.lottoresult.LottoResults;
 
 public class OutputView {
+
+    private final String DIVIDER = "---";
+    private final String NEW_LINE = "\n";
+
     public void writeLottoCount(LottoCount lottoCount) {
         System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(lottoCount.toString())
-                + ViewMessage.NEW_LINE.getMessage());
+                + NEW_LINE);
     }
 
     public void writeLottos(Lottos lottos) {
         System.out.println(lottos);
     }
 
-    // TODO : 파라미터로 결과 출력.
-    public void writeDrawLottoResult() {
+    public void writeDrawLottoResult(LottoResults lottoResults) {
         System.out.println(ViewMessage.DRAW_LOTTO_RESULT_OUTPUT_MESSAGE.getMessage());
-        System.out.println(ViewMessage.DIVIDER.getMessage());
-//        System.out.println(ViewMessage.MATCH_3_MESSAGE.getMessage(), match3PrizeMoney, match3Count);
-//        System.out.println(ViewMessage.MATCH_4_MESSAGE.getMessage(), match4PrizeMoney, match4Count);
-//        System.out.println(ViewMessage.MATCH_5_MESSAGE.getMessage(), match5PrizeMoney, match5Count);
-//        System.out.println(ViewMessage.MATCH_5_AND_BONUS_MESSAGE.getMessage(), match5AndBonusPrizeMoney, match5AndBonusCount);
-//        System.out.println(ViewMessage.MATCH_6_MESSAGE.getMessage(), match6PrizeMoney, match6Count);
+        System.out.println(DIVIDER);
+        System.out.println(resultFormat(lottoResults.getRankCount()));
+        System.out.println(rateOfReturnFormat(lottoResults.getRateOfReturn()));
     }
 
-    // TODO : 파라미터를 dto로 수정해야함.
-    public void writeRateOfReturn(Double rateOfReturn) {
-        System.out.println(ViewMessage.RATE_OF_RETURN_OUTPUT_MESSAGE.getMessage(rateOfReturn.toString()));
+    private String rateOfReturnFormat(double rateOfReturn) {
+        String formattedRate = String.format("%.1f", rateOfReturn);
+        return ViewMessage.RATE_OF_RETURN_OUTPUT_MESSAGE.getMessage(formattedRate);
+    }
+
+    private String resultFormat(Map<LottoRank, Integer> rankCount) {
+        return ViewMessage.FIFTH_MESSAGE
+                        .getMessage(String.valueOf(rankCount.get(LottoRank.FIFTH))) +
+                NEW_LINE +
+                ViewMessage.FOURTH_MESSAGE
+                        .getMessage(String.valueOf(rankCount.get(LottoRank.FOURTH))) +
+                NEW_LINE +
+                ViewMessage.THIRD_MESSAGE
+                        .getMessage(String.valueOf(rankCount.get(LottoRank.THIRD))) +
+                NEW_LINE +
+                ViewMessage.SECOND_MESSAGE
+                        .getMessage(String.valueOf(rankCount.get(LottoRank.SECOND))) +
+                NEW_LINE +
+                ViewMessage.FIRST_MESSAGE
+                        .getMessage(String.valueOf(rankCount.get(LottoRank.FIRST)));
     }
 }
