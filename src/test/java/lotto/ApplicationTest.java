@@ -4,6 +4,10 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -46,10 +50,30 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
-    void 예외_테스트() {
+    @ParameterizedTest
+    @ValueSource(strings = {"1000j", "123", "45000 ", "3000원", "0", "-1"})
+    void 금액_입력_예외케이스(String input) {
         assertSimpleTest(() -> {
-            runException("1000j");
+            runException(input);
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"1:2:3:4:5:6", "1,2,3,4,5", "0,1,2,3,4,5", "1,2,3,4,5,46", "1,2,3,4,5,5", "1, 2, 3, 4, 5, 6"})
+    void 번호_입력_예외케이스(String input) {
+        assertSimpleTest(() -> {
+            runException("1000", input, "45");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", " ", "0", "-1", "46"})
+    void 보너스_번호_입력_예외케이스(String input) {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,3,4,5,6", input);
             assertThat(output()).contains(ERROR_MESSAGE);
         });
     }
