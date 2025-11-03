@@ -24,7 +24,7 @@ public class LottoGenerator {
                 .mapToObj(i -> createLotto())
                 .toList();
 
-        return new Lottos(lottos);
+        return new Lottos(lottos, lottoCount);
     }
 }
 

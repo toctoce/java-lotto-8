@@ -2,8 +2,9 @@ package lotto.domain.vo.lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.vo.LottoCount;
 
-public record Lottos(List<Lotto> lottos) {
+public record Lottos(List<Lotto> lottos, LottoCount lottoCount) {
 
     public static final String DELIMITER = "\n";
 

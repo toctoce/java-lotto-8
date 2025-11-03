@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.vo.Budget;
 import lotto.domain.vo.DrawnLottoNumber;
+import lotto.domain.vo.LottoCount;
 import lotto.domain.vo.lotto.Lotto;
 import lotto.domain.vo.lotto.Lottos;
 import lotto.domain.vo.lottoresult.LottoResults;
@@ -79,6 +80,6 @@ class LottoResultGeneratorTest {
                 .map(LottoResultGeneratorTest::createLotto)
                 .toList();
 
-        return new Lottos(lottos);
+        return new Lottos(lottos, new LottoCount(lottoNumbers.size()));
     }
 }
