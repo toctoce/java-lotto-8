@@ -1,10 +1,8 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Map;
 import lotto.domain.message.ViewMessage;
 import lotto.domain.vo.LottoCount;
-import lotto.domain.vo.lotto.Lotto;
 import lotto.domain.vo.lotto.Lottos;
 import lotto.domain.vo.lottoresult.LottoRank;
 import lotto.domain.vo.lottoresult.LottoResults;
@@ -16,20 +14,19 @@ public class OutputView {
 
     public void writePurchaseHistory(Lottos lottos) {
         writeLottoCount(lottos.lottoCount());
-        writeLottos(lottos.lottos());
+        writeLottos(lottos);
     }
 
     private void writeLottoCount(LottoCount lottoCount) {
-        System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(lottoCount.toString())
-                + NEW_LINE);
+        System.out.println(NEW_LINE + ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(lottoCount.toString()));
     }
 
-    private void writeLottos(List<Lotto> lottos) {
+    private void writeLottos(Lottos lottos) {
         System.out.println(lottos);
     }
 
     public void writeLottoResults(LottoResults lottoResults) {
-        System.out.println(ViewMessage.DRAW_LOTTO_RESULT_OUTPUT_MESSAGE.getMessage());
+        System.out.println(NEW_LINE + ViewMessage.DRAW_LOTTO_RESULT_OUTPUT_MESSAGE.getMessage());
         System.out.println(DIVIDER);
         System.out.println(resultFormat(lottoResults.getRankCount()));
         System.out.println(rateOfReturnFormat(lottoResults.getRateOfReturn()));

@@ -13,4 +13,9 @@ public record LottoCount(int lottoCount) {
     public static LottoCount of(Budget budget) {
         return new LottoCount(budget.amount() / Constants.LOTTO_PRICE);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoCount);
+    }
 }
