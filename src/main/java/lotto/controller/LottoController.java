@@ -53,7 +53,7 @@ public class LottoController {
             String bonusNumberInput = inputView.readDrawnLottoBonusNumber();
             return Parser.InputToDrawnLotto(numbersInput, bonusNumberInput);
         } catch (IllegalArgumentException e) {
-            outputView.writeError(e.getMessage());
+            outputView.writeError(e);
             return createDrawnLottoFromUserInput();
         }
     }
@@ -63,7 +63,7 @@ public class LottoController {
             String budgetInput = inputView.readBudget();
             return Parser.InputToBudget(budgetInput);
         } catch (IllegalArgumentException e) {
-            outputView.writeError(e.getMessage());
+            outputView.writeError(e);
             return createBudgetFromUserInput();
         }
     }
