@@ -2,11 +2,16 @@ package lotto.view;
 
 import lotto.domain.message.ViewMessage;
 import lotto.domain.vo.LottoCount;
+import lotto.domain.vo.lotto.Lottos;
 
 public class OutputView {
     public void writeLottoCount(LottoCount lottoCount) {
         System.out.println(ViewMessage.LOTTO_COUNT_OUTPUT_MESSAGE.getMessage(lottoCount.toString())
                 + ViewMessage.NEW_LINE.getMessage());
+    }
+
+    public void writeLottos(Lottos lottos) {
+        System.out.println(lottos);
     }
 
     // TODO : 파라미터로 결과 출력.
